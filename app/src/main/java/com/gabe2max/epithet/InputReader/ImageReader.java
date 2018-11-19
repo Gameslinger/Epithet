@@ -37,6 +37,7 @@ public class ImageReader {
         File directory = new File(path+"/images");
         String[] images = directory.list();
         Log.w("ImageReader", directory.getAbsolutePath());
+        //TODO: Fix empty list:
         for(String image : images){
             imageMap.put(image, BitmapFactory.decodeFile(path+"/images/"+image));
         }
@@ -59,6 +60,8 @@ public class ImageReader {
                         labels.add(reader.nextString());
                     }
                     reader.endArray();
+                } else if (name.equals("url")){
+                    reader.skipValue();
                 }
 
             }

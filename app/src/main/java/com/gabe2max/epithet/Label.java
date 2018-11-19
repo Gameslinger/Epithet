@@ -1,12 +1,14 @@
 package com.gabe2max.epithet;
 
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.gabe2max.epithet.ImageLabel.ImageDownloader;
 import com.gabe2max.epithet.ImageLabel.ImageWriter;
 import com.gabe2max.epithet.ImageLabel.LabelImage;
 import com.gabe2max.epithet.InputReader.ImageReader;
@@ -14,6 +16,8 @@ import com.gabe2max.epithet.InputReader.ImageReader;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executor;
 
 public class Label extends AppCompatActivity {
     List<LabelImage> images;
@@ -28,9 +32,12 @@ public class Label extends AppCompatActivity {
         setContentView(R.layout.activity_label);
         path = getExternalFilesDir(Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath();
         image = (ImageView) findViewById(R.id.labelImage);
-        //Should this be on the main thread?
+
+        //Should this not be on the main thread?
+        //How to wait until images are downloaded?
         images = new ImageReader(path).readLabelImages();
         imagesItorator = images.iterator();
+
         //images = new ImageReader(getString(R.string.directory)).readLabelImages().iterator();
         //Put buttons in list:
         buttons.add((Button) findViewById(R.id.button));
