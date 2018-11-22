@@ -5,5 +5,5 @@ package com.gabe2max.epithet.ImageLabel;
  */
 
 public interface ImageListener {
-    void onComplete();
+    void onComplete(String directory);
 }

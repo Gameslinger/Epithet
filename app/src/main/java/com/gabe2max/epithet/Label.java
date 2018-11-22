@@ -30,7 +30,7 @@ public class Label extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_label);
-        path = getExternalFilesDir(Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath();
+        path = getIntent().getStringExtra("directory");
         image = (ImageView) findViewById(R.id.labelImage);
 
         //Should this not be on the main thread?
@@ -65,6 +65,10 @@ public class Label extends AppCompatActivity {
         if(imagesItorator == null || !imagesItorator.hasNext()) {
             ImageWriter imageWriter = new ImageWriter(path);
             imageWriter.writeResponses(images);
+            //TODO Submit responses....
+
+
+            finish();
             return;
         }
         currentImage = imagesItorator.next();

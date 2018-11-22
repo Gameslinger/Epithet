@@ -31,7 +31,6 @@ public class ImageDownloader extends AsyncTask<String, Void, Boolean> {
     Map<String,String> urls;
     String directory;
     ImageListener listener;
-
     public ImageDownloader(String directory, ImageListener listener){
         this.directory = directory;
         this.listener = listener;
@@ -99,15 +98,18 @@ public class ImageDownloader extends AsyncTask<String, Void, Boolean> {
     @Override
     protected Boolean doInBackground(String... params) {
         try {
+            File dir = new File(directory);
+            if(!dir.exists()) dir.mkdirs();
             for (String key : urls.keySet()) {
               /*  HttpURLConnection connection = (HttpURLConnection) new URL(urls.get(key)).openConnection();
                 connection.setDoInput(true);
                 connection.connect();
                 InputStream input = connection.getInputStream();
                 */
-                InputStream input = new BufferedInputStream(new URL(urls.get(key)).openStream());
 
                 File outFile = new File(directory+"/images/"+key);
+                if(outFile.exists())continue;
+                InputStream input = new BufferedInputStream(new URL(urls.get(key)).openStream());
                 OutputStream output = new FileOutputStream(outFile);
                 byte[] buffer = new byte[1024];
                 int size = 0;
@@ -130,7 +132,7 @@ public class ImageDownloader extends AsyncTask<String, Void, Boolean> {
     }
     @Override
     protected void onPostExecute(Boolean result) {
-        listener.onComplete();
+        listener.onComplete(this.directory);
     }
 
 }
