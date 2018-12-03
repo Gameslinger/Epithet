@@ -1,18 +1,22 @@
 package com.gabe2max.epithet;
 
+import android.media.MediaPlayer;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.gabe2max.epithet.ImageLabel.ImageDownloader;
 import com.gabe2max.epithet.ImageLabel.ImageWriter;
 import com.gabe2max.epithet.ImageLabel.LabelImage;
 import com.gabe2max.epithet.InputReader.ImageReader;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,6 +29,8 @@ public class Label extends AppCompatActivity {
     LabelImage currentImage;
     ImageView image;
     List<Button> buttons = new ArrayList<>();
+
+    MediaPlayer mp;
     String path;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +39,14 @@ public class Label extends AppCompatActivity {
         path = getIntent().getStringExtra("directory");
         image = (ImageView) findViewById(R.id.labelImage);
 
-        //Should this not be on the main thread?
-        //How to wait until images are downloaded?
+        mp = MediaPlayer.create(this, R.raw.bell);
+
         images = new ImageReader(path).readLabelImages();
+
+        if(images == null){
+            Toast.makeText(this, "Could not open batch", Toast.LENGTH_SHORT);
+            finish();
+        }
         imagesItorator = images.iterator();
 
         //images = new ImageReader(getString(R.string.directory)).readLabelImages().iterator();
@@ -49,7 +60,13 @@ public class Label extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    mp.stop();
+                    try {
+                        mp.prepare();
+                    } catch (IOException e) {
+                        Log.e("Label","Could not read Sound file");
+                    }
+                    mp.start();
                     onButtonClick((Button) v);
                 }
             });

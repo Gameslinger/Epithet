@@ -1,34 +1,28 @@
 package com.gabe2max.epithet.batchGetter;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import android.widget.Toast;
+
+import com.gabe2max.epithet.ImageLabel.ImageDownloader;
+import com.gabe2max.epithet.ImageLabel.ImageListener;
+import com.gabe2max.epithet.adapters.BatchItem;
+
+import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Owner on 11/22/2018.
  */
 
-public class MocBatchFinder implements BatchGetter {
-        static Map batchMap;
-        static {
-            batchMap = new HashMap<String, String>();
-            batchMap.put("Test", "test");
-            batchMap.put("Android", "test");
-            batchMap.put("Cats", "test");
-        }
+public class MocBatchFinder implements BatchFinder {
 
     @Override
-    public String[] getNames() {
-        Set<String> set = batchMap.keySet();
-        String[] strArr = new String[set.size()];
-        int i = 0;
-        for (String str : set) {
-            strArr[i++] = str;
-        }
-        return strArr;
+    public List<BatchItem> getItems() {
+        //TODO: Add Moc BatchItem
     }
+
     @Override
-    public String getBatch(String name) {
-        return (String) batchMap.get(name);
+    public void getBatch(BatchItem bi, String path, ImageListener callback) throws IOException {
+        ImageDownloader imageDownloader = new ImageDownloader(path+"/"+bi.getDirectory(),callback);
+            imageDownloader.execute();
+        }
     }
-}

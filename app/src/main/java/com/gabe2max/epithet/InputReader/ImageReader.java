@@ -35,9 +35,13 @@ public class ImageReader {
     private Map<String,Bitmap> getImages(){
         Map<String,Bitmap> imageMap = new HashMap();
         File directory = new File(path+"/images");
+
+        if(!directory.exists()) directory.mkdirs();
+
         String[] images = directory.list();
         Log.w("ImageReader", directory.getAbsolutePath());
         //TODO: Fix empty list:
+        if(images.length == 0) return null;
         for(String image : images){
             imageMap.put(image, BitmapFactory.decodeFile(path+"/images/"+image));
         }

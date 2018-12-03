@@ -31,12 +31,11 @@ public class ImageDownloader extends AsyncTask<String, Void, Boolean> {
     Map<String,String> urls;
     String directory;
     ImageListener listener;
-    public ImageDownloader(String directory, ImageListener listener){
+    public ImageDownloader(String directory, ImageListener listener) throws IOException{
         this.directory = directory;
         this.listener = listener;
         urls = new HashMap<>();
-        //TODO: Finish reading in file name and urls to be used to download images
-        try{
+
         JsonReader jsonReader = new JsonReader((new InputStreamReader(new FileInputStream(new File(this.directory+"/labels.json")))));
             String fileName = null;
             String url = null;
@@ -62,43 +61,13 @@ public class ImageDownloader extends AsyncTask<String, Void, Boolean> {
                 jsonReader.endObject();
             }
             jsonReader.endArray();
-        }catch (IOException ex){
-            Log.w("Image Downloader","Could not Read Requested File");
-            ex.printStackTrace();
-        }
+
     }
 
-    //TODO: Put on seperate thread? What to do if interrupted? Async Task or Futures?
-    /*public boolean download() {
-        try {
-            for (String key : urls.keySet()) {
-                HttpURLConnection connection = (HttpURLConnection) new URL(urls.get(key)).openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-
-                File outFile = new File(directory+"/images/"+key);
-                OutputStream output = new FileOutputStream(outFile);
-                byte[] buffer = new byte[input.available()];
-                input.read(buffer);
-                output.write(buffer);
-                output.flush();
-                output.close();
-                input.close();
-            }
-
-        } catch (IOException ex) {
-            Log.e("Image Downloader","Could not download image");
-            return false;
-        }
-        return true;
-    }
-*/
-    //What to do if file exists? Is that a problem?
     @Override
     protected Boolean doInBackground(String... params) {
         try {
-            File dir = new File(directory);
+            File dir = new File(directory+"/images");
             if(!dir.exists()) dir.mkdirs();
             for (String key : urls.keySet()) {
               /*  HttpURLConnection connection = (HttpURLConnection) new URL(urls.get(key)).openConnection();
@@ -108,6 +77,7 @@ public class ImageDownloader extends AsyncTask<String, Void, Boolean> {
                 */
 
                 File outFile = new File(directory+"/images/"+key);
+
                 if(outFile.exists())continue;
                 InputStream input = new BufferedInputStream(new URL(urls.get(key)).openStream());
                 OutputStream output = new FileOutputStream(outFile);
