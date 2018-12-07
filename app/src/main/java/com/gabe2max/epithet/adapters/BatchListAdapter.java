@@ -2,6 +2,7 @@ package com.gabe2max.epithet.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.gabe2max.epithet.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BatchListAdapter extends BaseAdapter {
@@ -24,17 +26,17 @@ public class BatchListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return values.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return values.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return values.get(position).hashCode();
     }
 
     @Override
@@ -45,9 +47,9 @@ public class BatchListAdapter extends BaseAdapter {
         TextView titleView = (TextView) rowView.findViewById(R.id.BatchText);
         TextView pointView = (TextView) rowView.findViewById(R.id.PointText);
 
-        BatchItem item = values.get(position);
-        titleView.setText(item.getTitle());
-        pointView.setText(item.getPointValue());
+        BatchItem item = (BatchItem) values.get(position);
+        titleView.setText(item.getTitle()+": "+item.getSize()+" Items");
+        pointView.setText("Value: "+item.getPointValue()+" points");
         imageView.setImageBitmap(item.getImage());
         return rowView;
     }

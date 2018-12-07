@@ -4,26 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListItem"
-    android:orientation="horizontal">
+    android:gravity="center"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/BatchImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_weight="1"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        android:visibility="visible" />
 
     <TextView
         android:id="@+id/BatchText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:layout_weight="2"
+        android:text="hi"
+        android:textAlignment="center"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/PointText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:layout_weight="2"
+        android:text="hi"
+        android:textAlignment="center"
+        android:textColor="@color/pointGreen"
+        android:textSize="18sp" />
+
+
 </LinearLayout>
