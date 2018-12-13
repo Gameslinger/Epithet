@@ -17,7 +17,7 @@ public class TabView extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tab_view);
         swipeCollectionPagerAdapter = new SwipeCollectionPagerAdapter(getSupportFragmentManager());
-        ViewPager pager = (ViewPager) findViewById(R.id.pager);
+        ViewPager pager = (ViewPager) findViewById(R.id.view_pager);
 
         pager.setAdapter(swipeCollectionPagerAdapter);
     }
