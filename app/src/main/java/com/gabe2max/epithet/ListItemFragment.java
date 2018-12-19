@@ -26,8 +26,6 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class ListItemFragment extends ListFragment {
-
-    // TODO: Rename and change types of parameters
     private List<BatchItem> list;
 
     public ListItemFragment() {
@@ -41,7 +39,6 @@ public class ListItemFragment extends ListFragment {
         this.list = list;
     }
 
-    // TODO: Rename and change types and number of parameters
     public static ListItemFragment newInstance() {
         ListItemFragment fragment = new ListItemFragment();
         return fragment;
@@ -66,7 +63,6 @@ public class ListItemFragment extends ListFragment {
         return inflater.inflate(R.layout.fragment_list_item, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
 
     }
@@ -93,7 +89,6 @@ public class ListItemFragment extends ListFragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

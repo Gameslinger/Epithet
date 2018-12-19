@@ -40,7 +40,6 @@ public class ImageReader {
 
         String[] images = directory.list();
         Log.w("ImageReader", directory.getAbsolutePath());
-        //TODO: Fix empty list:
         if(images.length == 0) return null;
         for(String image : images){
             imageMap.put(image, BitmapFactory.decodeFile(path+"/images/"+image));

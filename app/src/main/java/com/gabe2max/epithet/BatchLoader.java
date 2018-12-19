@@ -35,6 +35,7 @@ public class BatchLoader extends Fragment implements ImageListener {
     //Please clean!
     BatchLoader bl;
     String path;
+
     //TODO: Clean this up! Please...
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
@@ -42,14 +43,14 @@ public class BatchLoader extends Fragment implements ImageListener {
        // setContentView(R.layout.activity_batch_loader);
         //path = getExternalFilesDir(Environment.getDataDirectory().getAbsolutePath()).getAbsolutePath();
         final View batchLoader = inflater.inflate(R.layout.activity_batch_loader, container, false);
+        //TODO: Replace Static Path!!!!
         path = "/storage/emulated/0/Android/data/com.gabe2max.epithet/files/data/";
-        Log.w("BatchLoaderz",path);
         batchFinder = new MocBatchFinder(path);
         bl = this;
         lv = (ListView) batchLoader.findViewById(R.id.BatchList);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            //TODO: Move into Batch Getter
+            //TODO: Move into Batch Getter?
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(batchLoader.getContext(),"Downloading Images",Toast.LENGTH_LONG).show();
                 try {
