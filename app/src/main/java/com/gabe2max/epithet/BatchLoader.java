@@ -1,26 +1,20 @@
 package com.gabe2max.epithet;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Environment;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.gabe2max.epithet.ImageLabel.ImageListener;
 import com.gabe2max.epithet.adapters.BatchItem;
 import com.gabe2max.epithet.adapters.BatchListAdapter;
-import com.gabe2max.epithet.batchGetter.BatchFinder;
-import com.gabe2max.epithet.batchGetter.MocBatchFinder;
+import com.gabe2max.epithet.batchManager.BatchManager;
+import com.gabe2max.epithet.batchManager.MocBatchManager;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -31,7 +25,7 @@ import java.util.Set;
 public class BatchLoader extends Fragment implements ImageListener {
     ListView lv;
     Set<Integer> downloadedBatches = new HashSet<>();
-    BatchFinder batchFinder;
+    BatchManager batchFinder;
     //Please clean!
     BatchLoader bl;
     String path;
@@ -45,7 +39,7 @@ public class BatchLoader extends Fragment implements ImageListener {
         final View batchLoader = inflater.inflate(R.layout.activity_batch_loader, container, false);
         //TODO: Replace Static Path!!!!
         path = "/storage/emulated/0/Android/data/com.gabe2max.epithet/files/data/";
-        batchFinder = new MocBatchFinder(path);
+        batchFinder = new MocBatchManager(path);
         bl = this;
         lv = (ListView) batchLoader.findViewById(R.id.BatchList);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {

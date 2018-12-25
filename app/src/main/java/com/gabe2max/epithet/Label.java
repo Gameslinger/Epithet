@@ -36,6 +36,7 @@ public class Label extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_label);
+
         path = getIntent().getStringExtra("directory");
         image = (ImageView) findViewById(R.id.labelImage);
 

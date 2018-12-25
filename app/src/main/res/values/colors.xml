@@ -7,4 +7,9 @@
    <color name="colorPrimaryDark">#009933</color>
     <color name="colorAccent">#ffff00</color>
     <color name="pointGreen">#009900</color>
+
+    <color name="firstPlace">#cccc00</color>
+    <color name="secondPlace">#a6a6a6</color>
+    <color name="thirdPlace">#cc6600</color>
+    <color name="otherPlace">#515151</color>
 </resources>

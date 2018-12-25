@@ -1,15 +1,11 @@
-package com.gabe2max.epithet.batchGetter;
+package com.gabe2max.epithet.batchManager;
 
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.gabe2max.epithet.ImageLabel.ImageDownloader;
 import com.gabe2max.epithet.ImageLabel.ImageListener;
 import com.gabe2max.epithet.adapters.BatchItem;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +14,9 @@ import java.util.List;
  * Created by Owner on 11/22/2018.
  */
 
-public class MocBatchFinder implements BatchFinder {
+public class MocBatchManager implements BatchManager {
     String path;
-    public MocBatchFinder(String path){
+    public MocBatchManager(String path){
         this.path = path;
     }
 
