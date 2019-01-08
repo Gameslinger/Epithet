@@ -4,4 +4,5 @@ import java.util.List;
 
 public interface UserManager {
     List<User> getUsers();
+    User getCurrentUser();
 }

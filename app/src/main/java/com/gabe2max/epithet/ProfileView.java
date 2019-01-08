@@ -12,8 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ProfileView extends Fragment {
+import com.gabe2max.epithet.user.User;
 
+public class ProfileView extends Fragment {
+    User lastUser = null;
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         final View profileView = inflater.inflate(R.layout.activity_profile_view, container, false);
@@ -31,8 +33,22 @@ public class ProfileView extends Fragment {
         TextView username = (TextView) profileView.findViewById(R.id.userName);
         TextView totalBatches = (TextView) profileView.findViewById(R.id.totalBatches);
         TextView totalPoints = (TextView) profileView.findViewById(R.id.totalPoints);
+        //Populate profile view...
+        /*
+        TODO: View has to save user from first creation so that arguments can be cleared...
+        If arguments aren't cleared then going to recent apps crashes the app...
+         */
+        if(lastUser == null) {
+            lastUser = Util.getUserFromBundle(getArguments());
+            getArguments().clear();
+        }
+        profilePic.setImageBitmap(lastUser.getProfilePic());
+        username.setText(lastUser.getUsername());
+        //TODO: Change? Error: can't find resource, works after tostring...
+        totalBatches.setText(Integer.toString(lastUser.getTotalBatches()));
+        totalPoints.setText(Long.toString(lastUser.getTotalPoints()));
 
-        profilePic.setImageBitmap(Util.getBitMap("/storage/emulated/0/Android/data/com.gabe2max.epithet/files/data/profilePictures/grandma.jpg"));
+
         return profileView;
     }
 }

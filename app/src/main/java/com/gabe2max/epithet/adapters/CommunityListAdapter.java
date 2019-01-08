@@ -1,6 +1,9 @@
 package com.gabe2max.epithet.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,7 +11,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gabe2max.epithet.ProfileView;
 import com.gabe2max.epithet.R;
+import com.gabe2max.epithet.Util;
 import com.gabe2max.epithet.user.User;
 
 import java.util.ArrayList;
@@ -72,12 +77,23 @@ public class CommunityListAdapter extends BaseAdapter {
                 placeStr += "th";
         }
 
-        User user = users.get(position);
+        final User user = users.get(position);
         placeText.setText(placeStr);
         placeUsername.setText(user.getUsername());
         placePoints.setText("Points: "+user.getTotalPoints());
         profilePic.setImageBitmap(user.getProfilePic());
-        //TODO: OnClickListener to open selected profile....
+
+        listItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO: Create intent? to open profile for item...
+                Intent viewProfileIntent = new Intent(context,ProfileView.class);
+                Bundle profileBundle = new Bundle();
+                Util.userToBundle(user,profileBundle);
+                viewProfileIntent.putExtras(profileBundle);
+            }
+        });
+
         return listItemView;
     }
 }

@@ -1,6 +1,7 @@
 package com.gabe2max.epithet.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.gabe2max.epithet.ProfileView;
 import com.gabe2max.epithet.R;
 
 import java.util.ArrayList;
@@ -42,7 +44,7 @@ public class BatchListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.fragment_list_item, parent, false);
+        final View rowView = inflater.inflate(R.layout.fragment_list_item, parent, false);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.BatchImage);
         TextView titleView = (TextView) rowView.findViewById(R.id.BatchText);
         TextView pointView = (TextView) rowView.findViewById(R.id.PointText);
@@ -51,6 +53,7 @@ public class BatchListAdapter extends BaseAdapter {
         titleView.setText(item.getTitle()+": "+item.getSize()+" Items");
         pointView.setText("Value: "+item.getPointValue()+" points");
         imageView.setImageBitmap(item.getImage());
+
         return rowView;
     }
 }

@@ -6,12 +6,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MocUserManager implements UserManager {
-    //Change to less static path, move to internal data directory?
+    //TODO: Change to less static path, move to internal data directory?
     static String PATH = "/storage/emulated/0/Android/data/com.gabe2max.epithet/files/data/profilePictures/";
+
+    @Override
+    public User getCurrentUser(){
+        return new User("LabelKing15", Util.getBitMap(PATH+"labelKing15.jpg"),99,75000);
+
+    }
     @Override
     public List<User> getUsers() {
         List<User> users = new ArrayList<>();
-        //Add moc users to load. Todo: Add pictures to moc users....
+        //Add moc users to load.
         users.add(new User("User123", Util.getBitMap(PATH+"user123.jpg"),7,15000));
         users.add(new User("HelloKitty", Util.getBitMap(PATH+"helloKitty.png"),14,99000));
         users.add(new User("LabelKing15", Util.getBitMap(PATH+"labelKing15.jpg"),99,75000));
