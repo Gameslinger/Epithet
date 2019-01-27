@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import com.gabe2max.epithet.ImageLabel.ImageDownloader;
 import com.gabe2max.epithet.ImageLabel.ImageListener;
 import com.gabe2max.epithet.adapters.BatchItem;
+import com.gabe2max.epithet.user.ProfileManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,4 +36,5 @@ public class MocBatchManager implements BatchManager {
         ImageDownloader imageDownloader = new ImageDownloader(path+"/"+bi.getDirectory(),callback);
             imageDownloader.execute();
         }
-    }
+
+}

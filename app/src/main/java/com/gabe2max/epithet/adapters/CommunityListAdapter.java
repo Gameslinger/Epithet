@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.gabe2max.epithet.ProfileView;
 import com.gabe2max.epithet.R;
+import com.gabe2max.epithet.UserViewActivity;
 import com.gabe2max.epithet.Util;
 import com.gabe2max.epithet.user.User;
 
@@ -87,10 +88,12 @@ public class CommunityListAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //TODO: Create intent? to open profile for item...
-                Intent viewProfileIntent = new Intent(context,ProfileView.class);
+                Intent viewProfileIntent = new Intent(context,UserViewActivity.class);
                 Bundle profileBundle = new Bundle();
-                Util.userToBundle(user,profileBundle);
+                //Util.userToBundle(user,profileBundle);
+                profileBundle.putString("username",user.getUsername());
                 viewProfileIntent.putExtras(profileBundle);
+                context.startActivity(viewProfileIntent);
             }
         });
 

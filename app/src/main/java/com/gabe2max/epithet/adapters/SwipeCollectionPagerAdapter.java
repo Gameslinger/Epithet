@@ -26,13 +26,10 @@ public class SwipeCollectionPagerAdapter extends FragmentPagerAdapter {
         //TODO: How to pass user through bundle nicely, look at ugly util methods...
         ProfileView profileView = new ProfileView();
         Bundle userBundle = new Bundle();
-        //Static reference to usermanager?
-        UserManager userManager = new MocUserManager();
-        Util.userToBundle(userManager.getCurrentUser(),userBundle);
+        userBundle.putString("username",UserManager.INSTANCE.getCurrentUser().getUsername());
         profileView.setArguments(userBundle);
         views.add(profileView);
         titles.add("Profile");
-
         views.add(new BatchLoader());
         titles.add("Label");
         views.add(new CommunityView());

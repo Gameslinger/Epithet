@@ -32,6 +32,7 @@ public class User implements Comparable{
         return totalPoints;
     }
 
+
     @Override
     public int compareTo(@NonNull Object o) {
         if(o instanceof User){

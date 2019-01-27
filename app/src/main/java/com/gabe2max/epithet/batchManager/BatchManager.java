@@ -18,4 +18,5 @@ public interface BatchManager {
      */
     List<BatchItem> getItems();
     void getBatch(BatchItem bi, String path, ImageListener callback) throws IOException;
+
 }

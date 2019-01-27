@@ -2,7 +2,10 @@ package com.gabe2max.epithet.user;
 
 import java.util.List;
 
-public interface UserManager {
-    List<User> getUsers();
-    User getCurrentUser();
+public abstract class UserManager {
+    //This feels wrong:
+    public static UserManager INSTANCE = new MocUserManager();
+    public abstract List<User> getUsers();
+    public abstract User getCurrentUser();
+    public abstract User getUserByUsername(String name);
 }

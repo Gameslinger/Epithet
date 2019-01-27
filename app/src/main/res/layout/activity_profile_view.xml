@@ -22,7 +22,9 @@
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        tools:context=".ProfileView">
+        tools:context=".ProfileView"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="182dp">
 
         <ImageView
             android:id="@+id/profilePicture"

@@ -13,9 +13,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gabe2max.epithet.user.User;
+import com.gabe2max.epithet.user.UserManager;
 
 public class ProfileView extends Fragment {
-    User lastUser = null;
+    //User lastUser = null;//Old method when passing user in bundle...
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         final View profileView = inflater.inflate(R.layout.activity_profile_view, container, false);
@@ -35,20 +36,26 @@ public class ProfileView extends Fragment {
         TextView totalPoints = (TextView) profileView.findViewById(R.id.totalPoints);
         //Populate profile view...
         /*
-        TODO: View has to save user from first creation so that arguments can be cleared...
+
+        Old: TODO: View has to save user from first creation so that arguments can be cleared...
         If arguments aren't cleared then going to recent apps crashes the app...
          */
-        if(lastUser == null) {
+        /*if(lastUser == null) {
             lastUser = Util.getUserFromBundle(getArguments());
             getArguments().clear();
+        }*/
+        if(getArguments() == null) return profileView;
+        String name = getArguments().getString("username");
+
+        if(!name.equals(UserManager.INSTANCE.getCurrentUser().getUsername())){
+            editProfile.setVisibility(View.INVISIBLE);
         }
-        profilePic.setImageBitmap(lastUser.getProfilePic());
-        username.setText(lastUser.getUsername());
+        User user = UserManager.INSTANCE.getUserByUsername(name);
+        profilePic.setImageBitmap(user.getProfilePic());
+        username.setText(user.getUsername());
         //TODO: Change? Error: can't find resource, works after tostring...
-        totalBatches.setText(Integer.toString(lastUser.getTotalBatches()));
-        totalPoints.setText(Long.toString(lastUser.getTotalPoints()));
-
-
+        totalBatches.setText("Total Batches: "+Integer.toString(user.getTotalBatches()));
+        totalPoints.setText("Total Points: "+Long.toString(user.getTotalPoints()));
         return profileView;
     }
 }
